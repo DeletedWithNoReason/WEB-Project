@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Confirm Logout{% endblock %}
+
+{% block content %}
+<div style="max-width: 450px; margin: 80px auto; text-align: center; padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid #eee;">
+    <h2 style="color: #2d3436; font-weight: 800; margin-bottom: 15px;">Wait!</h2>
+    <p style="color: #636e72; margin-bottom: 30px; font-size: 1.1rem;">
+        Are you sure you want to end your session?
+    </p>
+
+    <form action="{% url 'users:logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-auth" style="width: 100%; padding: 12px; background-color: #d63031; border-color: #d63031; color: white; margin-bottom: 15px; cursor: pointer;">
+            Yes, Log Me Out
+        </button>
+    </form>
+
+    <a href="{% url 'users:homepage' %}" style="text-decoration: none; color: #0984e3; font-weight: 600; font-size: 0.95rem;">
+        No, take me back
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Project{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="{% url 'users:homepage' %}">Project</a>
+            </div>
+            
+            <div class="auth-actions">
+                {% if user.is_authenticated %}
+                    <span class="user-welcome">Hello, <strong>{{ user.phone }}</strong>!</span>
+                    
+                    <a href="{% url 'users:logout' %}" class="btn-auth logout-btn">
+                        Logout
+                    </a>
+                {% else %}
+                    <a href="{% url 'users:login' %}" class="btn-auth">Login</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}" style="padding: 10px; margin-bottom: 20px; border-radius: 4px; {% if message.tags == 'error' %}background-color: #ffcccc; color: #cc0000; border: 1px solid #cc0000;{% else %}background-color: #e1f5fe; color: #01579b; border: 1px solid #01579b;{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Student Project</p>
+    </footer>
+</body>
+</html>
