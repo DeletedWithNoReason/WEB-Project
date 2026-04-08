@@ -20,18 +20,18 @@ class CustomUserAdmin(BaseUserAdmin):
     list_display = ('email', 'phone', 'role', 'is_staff', 'is_active')
     list_filter = ('role', 'is_staff', 'is_active')
 
-    # This controls what you see when EDITING a user
+    
     fieldsets = (
         (None, {'fields': ('email', 'phone', 'password')}),
         ('User Info', {'fields': ('role',)}),
         ('Permissions', {'fields': ('is_staff', 'is_superuser', 'is_active')}),
     )
 
-    # This controls what you see when CREATING a new user
+    
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            # THE FIX: Explicitly list password1 and password2 here
+            
             'fields': ('email', 'phone', 'role', 'password1', 'password2'),
         }),
     )
